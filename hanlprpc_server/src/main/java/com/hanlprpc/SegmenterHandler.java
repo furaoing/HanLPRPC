@@ -27,14 +27,17 @@ import com.hankcs.hanlp.HanLP;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SegmenterHandler implements Segmenter.Iface {
 
-  public List<String> seg(String text){
-       List<String> result = new ArrayList<String>();
+  public List<Map<String, String>> seg(String text){
+       List<Map<String, String>> result = new ArrayList<>();
        List<Term> terms = HanLP.segment(text);
        for (Term t: terms){
-           result.add(t.word);
+           HashMap<String, String> tmp = new HashMap<>();
+           tmp.put(t.word, t.nature.toString());
+           result.add(tmp);
        }
        return result;
   }

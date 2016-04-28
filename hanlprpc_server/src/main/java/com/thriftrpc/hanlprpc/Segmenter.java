@@ -39,7 +39,7 @@ public class Segmenter {
 
   public interface Iface {
 
-    public List<String> seg(String text) throws org.apache.thrift.TException;
+    public List<Map<String,String>> seg(String text) throws org.apache.thrift.TException;
 
   }
 
@@ -69,7 +69,7 @@ public class Segmenter {
       super(iprot, oprot);
     }
 
-    public List<String> seg(String text) throws org.apache.thrift.TException
+    public List<Map<String,String>> seg(String text) throws org.apache.thrift.TException
     {
       send_seg(text);
       return recv_seg();
@@ -82,7 +82,7 @@ public class Segmenter {
       sendBase("seg", args);
     }
 
-    public List<String> recv_seg() throws org.apache.thrift.TException
+    public List<Map<String,String>> recv_seg() throws org.apache.thrift.TException
     {
       seg_result result = new seg_result();
       receiveBase(result, "seg");
@@ -132,7 +132,7 @@ public class Segmenter {
         prot.writeMessageEnd();
       }
 
-      public List<String> getResult() throws org.apache.thrift.TException {
+      public List<Map<String,String>> getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -196,7 +196,7 @@ public class Segmenter {
       return processMap;
     }
 
-    public static class seg<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, seg_args, List<String>> {
+    public static class seg<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, seg_args, List<Map<String,String>>> {
       public seg() {
         super("seg");
       }
@@ -205,10 +205,10 @@ public class Segmenter {
         return new seg_args();
       }
 
-      public AsyncMethodCallback<List<String>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<List<Map<String,String>>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<List<String>>() { 
-          public void onComplete(List<String> o) {
+        return new AsyncMethodCallback<List<Map<String,String>>>() { 
+          public void onComplete(List<Map<String,String>> o) {
             seg_result result = new seg_result();
             result.success = o;
             try {
@@ -242,7 +242,7 @@ public class Segmenter {
         return false;
       }
 
-      public void start(I iface, seg_args args, org.apache.thrift.async.AsyncMethodCallback<List<String>> resultHandler) throws TException {
+      public void start(I iface, seg_args args, org.apache.thrift.async.AsyncMethodCallback<List<Map<String,String>>> resultHandler) throws TException {
         iface.seg(args.text,resultHandler);
       }
     }
@@ -621,7 +621,7 @@ public class Segmenter {
       schemes.put(TupleScheme.class, new seg_resultTupleSchemeFactory());
     }
 
-    public List<String> success; // required
+    public List<Map<String,String>> success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -687,7 +687,9 @@ public class Segmenter {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+              new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+                  new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+                  new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(seg_result.class, metaDataMap);
     }
@@ -696,7 +698,7 @@ public class Segmenter {
     }
 
     public seg_result(
-      List<String> success)
+      List<Map<String,String>> success)
     {
       this();
       this.success = success;
@@ -707,7 +709,11 @@ public class Segmenter {
      */
     public seg_result(seg_result other) {
       if (other.isSetSuccess()) {
-        List<String> __this__success = new ArrayList<String>(other.success);
+        List<Map<String,String>> __this__success = new ArrayList<Map<String,String>>(other.success.size());
+        for (Map<String,String> other_element : other.success) {
+          Map<String,String> __this__success_copy = new HashMap<String,String>(other_element);
+          __this__success.add(__this__success_copy);
+        }
         this.success = __this__success;
       }
     }
@@ -725,22 +731,22 @@ public class Segmenter {
       return (this.success == null) ? 0 : this.success.size();
     }
 
-    public java.util.Iterator<String> getSuccessIterator() {
+    public java.util.Iterator<Map<String,String>> getSuccessIterator() {
       return (this.success == null) ? null : this.success.iterator();
     }
 
-    public void addToSuccess(String elem) {
+    public void addToSuccess(Map<String,String> elem) {
       if (this.success == null) {
-        this.success = new ArrayList<String>();
+        this.success = new ArrayList<Map<String,String>>();
       }
       this.success.add(elem);
     }
 
-    public List<String> getSuccess() {
+    public List<Map<String,String>> getSuccess() {
       return this.success;
     }
 
-    public seg_result setSuccess(List<String> success) {
+    public seg_result setSuccess(List<Map<String,String>> success) {
       this.success = success;
       return this;
     }
@@ -766,7 +772,7 @@ public class Segmenter {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((List<String>)value);
+          setSuccess((List<Map<String,String>>)value);
         }
         break;
 
@@ -924,11 +930,23 @@ public class Segmenter {
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
                   org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
-                  struct.success = new ArrayList<String>(_list0.size);
-                  String _elem1;
+                  struct.success = new ArrayList<Map<String,String>>(_list0.size);
+                  Map<String,String> _elem1;
                   for (int _i2 = 0; _i2 < _list0.size; ++_i2)
                   {
-                    _elem1 = iprot.readString();
+                    {
+                      org.apache.thrift.protocol.TMap _map3 = iprot.readMapBegin();
+                      _elem1 = new HashMap<String,String>(2*_map3.size);
+                      String _key4;
+                      String _val5;
+                      for (int _i6 = 0; _i6 < _map3.size; ++_i6)
+                      {
+                        _key4 = iprot.readString();
+                        _val5 = iprot.readString();
+                        _elem1.put(_key4, _val5);
+                      }
+                      iprot.readMapEnd();
+                    }
                     struct.success.add(_elem1);
                   }
                   iprot.readListEnd();
@@ -956,10 +974,18 @@ public class Segmenter {
         if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (String _iter3 : struct.success)
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.MAP, struct.success.size()));
+            for (Map<String,String> _iter7 : struct.success)
             {
-              oprot.writeString(_iter3);
+              {
+                oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, _iter7.size()));
+                for (Map.Entry<String, String> _iter8 : _iter7.entrySet())
+                {
+                  oprot.writeString(_iter8.getKey());
+                  oprot.writeString(_iter8.getValue());
+                }
+                oprot.writeMapEnd();
+              }
             }
             oprot.writeListEnd();
           }
@@ -990,9 +1016,16 @@ public class Segmenter {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (String _iter4 : struct.success)
+            for (Map<String,String> _iter9 : struct.success)
             {
-              oprot.writeString(_iter4);
+              {
+                oprot.writeI32(_iter9.size());
+                for (Map.Entry<String, String> _iter10 : _iter9.entrySet())
+                {
+                  oprot.writeString(_iter10.getKey());
+                  oprot.writeString(_iter10.getValue());
+                }
+              }
             }
           }
         }
@@ -1004,13 +1037,24 @@ public class Segmenter {
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new ArrayList<String>(_list5.size);
-            String _elem6;
-            for (int _i7 = 0; _i7 < _list5.size; ++_i7)
+            org.apache.thrift.protocol.TList _list11 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+            struct.success = new ArrayList<Map<String,String>>(_list11.size);
+            Map<String,String> _elem12;
+            for (int _i13 = 0; _i13 < _list11.size; ++_i13)
             {
-              _elem6 = iprot.readString();
-              struct.success.add(_elem6);
+              {
+                org.apache.thrift.protocol.TMap _map14 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+                _elem12 = new HashMap<String,String>(2*_map14.size);
+                String _key15;
+                String _val16;
+                for (int _i17 = 0; _i17 < _map14.size; ++_i17)
+                {
+                  _key15 = iprot.readString();
+                  _val16 = iprot.readString();
+                  _elem12.put(_key15, _val16);
+                }
+              }
+              struct.success.add(_elem12);
             }
           }
           struct.setSuccessIsSet(true);
