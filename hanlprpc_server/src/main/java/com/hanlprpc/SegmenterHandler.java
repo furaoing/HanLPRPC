@@ -36,7 +36,8 @@ public class SegmenterHandler implements Segmenter.Iface {
        List<Term> terms = HanLP.segment(text);
        for (Term t: terms){
            HashMap<String, String> tmp = new HashMap<>();
-           tmp.put(t.word, t.nature.toString());
+           tmp.put("word", t.word.toString());
+           tmp.put("nature", t.nature.toString());
            result.add(tmp);
        }
        return result;
